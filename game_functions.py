@@ -41,15 +41,12 @@ def update_screen(ai_settings, screen, ship, bullets):
     screen.fill(ai_settings.bg_color)
     ship.blitme()
 
-    # Make the most recently drawn screen visible.
-    pygame.display.flip()
-
     # Redraw all bullets behind ship and aliens.
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
-
-
+    # Make the most recently drawn screen visible.
+    pygame.display.flip()
 
 
 #def check_keydown_events(event, ai_setting, screen, ship, bullets):
