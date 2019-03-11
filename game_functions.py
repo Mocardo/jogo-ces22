@@ -86,10 +86,11 @@ def check_high_score(stats, sb):
         sb.prep_high_score()
 
 
-def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, background):
     """Update images on the screen and flip to the new screen."""
     # Redraw the screen during each pass through the loop.
-    screen.fill(ai_settings.bg_color)
+    #screen.fill(ai_settings.bg_color)
+    background.blitme()
     ship.blitme()
     #alien.blitme()
     aliens.draw(screen)
