@@ -18,3 +18,15 @@ class Background():
     def blitme(self):
         """Draw the background at its current location."""
         self.screen.blit(self.image, self.rect)
+
+    def blitme2(self):
+        """Draw the background on the auxiliar location"""
+        self.rect.bottom -= self.screen_rect.bottom
+        self.screen.blit(self.image, self.rect)
+        self.rect.bottom += self.screen_rect.bottom
+
+    def update(self):
+        if self.rect.bottom <= 2*self.screen_rect.bottom:
+            self.rect.bottom += 1
+        else:
+            self.rect.bottom = self.screen_rect.bottom
