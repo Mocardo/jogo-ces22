@@ -5,11 +5,10 @@ from pygame.sprite import Group
 from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
-from button import Button
-from ship import Ship
-from alien import Alien
+from rendering.button import Button
+from player.ship import Ship
 import game_functions as gf
-from background import Background
+from rendering.background import Background
 
 def run_game():
     # Initialize pygame, settings, and screen object.
@@ -54,4 +53,4 @@ def run_game():
         gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
                          play_button, background)
 
-run_game()5
+run_game()

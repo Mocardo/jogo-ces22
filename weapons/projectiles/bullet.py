@@ -1,11 +1,18 @@
-import pygame
-from pygame.sprite import Sprite
+from pygame import Surface
+from weapons.projectiles.abstract_projectile import AbstractProjectile
 
-class Bullet(Sprite):
-    """A class to manage bullets fired from the ship"""
 
+class Bullet(AbstractProjectile):
+    """A class to manage bullets fired by anyone."""
+
+    def __init__(self, screen, starting_position, starting_angle, damage_multiplier, speed_multiplier):
+        """Create a bullet at a given position moving through a given angle"""
+        super().__init__(screen, starting_position, starting_angle, damage_multiplier, speed_multiplier)
+
+        self.image = Surface()  # Dummy
+    """ 
     def __init__(self, ai_settings, screen, ship):
-        """Create a bullet object at the ship's current position."""
+        # Create a bullet object at the ship's current position.
         super(Bullet, self).__init__()
         self.screen = screen
 
@@ -20,15 +27,15 @@ class Bullet(Sprite):
 
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
-
+    
     def update(self):
-        """Move the bullet up the screen."""
+        " Move the bullet up the screen. "
         # Update the decimal position of the bullet.
         self.y -= self.speed_factor
         # Update the rect position.
         self.rect.y = self.y
-
+    
     def draw_bullet(self):
-        """Draw the bullet to the screen."""
+        " Draw the bullet to the screen. "
         pygame.draw.rect(self.screen, self.color, self.rect)
-
+    """
