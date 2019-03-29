@@ -22,7 +22,7 @@ class Button:
         """Turn msg into a rendered image and center text on the button."""
 
         self.msg_image = self.font.render(msg, True, self.text_color,
-                                      self.button_color)
+                                          self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
 
@@ -30,3 +30,10 @@ class Button:
         # Draw blank button and then draw message.
         self.screen.fill(self.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
+
+    def check_if_clicked(self, mouse_x, mouse_y):
+        button_clicked = self.rect.collidepoint(mouse_x, mouse_y)
+        if button_clicked:
+            return True
+        else:
+            return False

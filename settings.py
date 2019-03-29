@@ -1,4 +1,4 @@
-class Settings():
+class Settings:
     """A class to store all settings for Alien Invasion."""
     screen_width = 512
     screen_height = 768
@@ -28,8 +28,6 @@ class Settings():
     def __init__(self):
         """Initialize the game's static settings."""
         # Screen settings
-
-
 
 
     def increase_speed(self):

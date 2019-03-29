@@ -34,6 +34,23 @@ class AbstractProjectile(Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+    def is_on_screen(self, screen):
+        return self.rect.colliderect(screen.get_rect())
+
+    def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        bullets.update()
+        # Check for any bullets that have hit aliens.
+        # If so, get rid of the bullet and the alien.
+
+        # Get rid of bullets that have disappeared.
+        for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+
+        check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
+
     def draw(self, screen):
         """Draw the bullet to the screen."""
 
