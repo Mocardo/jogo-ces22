@@ -2,11 +2,13 @@ import pygame
 import sys
 
 
-class UserInput:
+class InputHandler:
     def __init__(self):
         self.q_pressed = False
         self.right_key_pressed = False
         self.left_key_pressed = False
+        self.up_key_pressed = False
+        self.down_key_pressed = False
         self.space_key_pressed = False
 
         self.mouse_left_button_pressed = False
@@ -27,6 +29,8 @@ class UserInput:
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT:     self.right_key_pressed = True
         elif event.key == pygame.K_LEFT:    self.left_key_pressed = True
+        elif event.key == pygame.K_UP:      self.right_key_pressed = True
+        elif event.key == pygame.K_DOWN:    self.down_key_pressed = True
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = True
         elif event.key == pygame.K_q:       self.q_pressed = True
 
@@ -34,5 +38,7 @@ class UserInput:
         """Respond to key releases."""
         if event.key == pygame.K_RIGHT:     self.right_key_pressed = False
         elif event.key == pygame.K_LEFT:    self.left_key_pressed = False
+        elif event.key == pygame.K_UP:      self.right_key_pressed = False
+        elif event.key == pygame.K_DOWN:    self.down_key_pressed = False
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = False
         elif event.key == pygame.K_q:       self.q_pressed = False

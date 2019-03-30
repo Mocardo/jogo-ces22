@@ -18,4 +18,4 @@ class Pistol(AbstractWeapon):
     def fire(self, current_position, angle):
         new_projectile = Bullet(self.screen, current_position, angle,
                                 self.damageMultiplier, self.speedMultiplier)
-        self.projectileGroup.add(new_projectile)
+        self.projectile_group.add(new_projectile)

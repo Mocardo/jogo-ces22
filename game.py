@@ -1,15 +1,16 @@
 import sys
 import pygame
 
-from actors.player import Ship
-from weapons.projectiles.projectile_group import ProjectileGroup
+from actors.player import Player
 from actors.enemies.enemy_group import EnemyGroup
+from weapons.projectiles.projectile_group import ProjectileGroup
 
 from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
-from input_handler import UserInput
+from input_handler import InputHandler
 from graphical_elements.painter import Painter
+from collision_manager import CollisionManager
 
 
 class Game:
@@ -24,11 +25,16 @@ class Game:
 
         # Make a ship, a group of projectiles, and a group of aliens.
 
-        self.ship = Ship(self.screen)
-        self.projectiles = ProjectileGroup(self.screen)
-        self.aliens = EnemyGroup(self.screen)
+        self.friend_projectiles = ProjectileGroup(self.screen)
+        self.enemy_projectiles = ProjectileGroup(self.screen)
+        self.neutral_projectiles = ProjectileGroup(self.screen)
 
-        self.user_input = UserInput()
+        self.player = Player(self.screen, self.friend_projectiles)
+        self.enemies = EnemyGroup(self.screen, self.enemy_projectiles)
+
+        self.collision_manager = CollisionManager(self)
+
+        self.input_handler = InputHandler()
         self.painter = Painter(self.screen, self)
 
         self.game_active = False
@@ -39,25 +45,29 @@ class Game:
 
     def run(self):
         while True:
-            self.user_input.update_key_states()
-            self.parse_user_input()
+            self.read_user_input()
             if self.game_active:
-                self.ship.update()
-                self.bullets.update()
-                self.update_aliens()
-                self.painter.paint()
+                self.player.update()
+                self.enemies.update()
+                self.friend_projectiles.update()
+                self.enemy_projectiles.update()
+                self.collision_manager.check_collisions()
                 if pygame.mixer.music.get_busy() == False:
                     pygame.mixer.music.play()
-            self.update_screen()
+            self.painter.paint()
 
-    def parse_user_input(self):
-        if self.user_input.q_pressed:
+    def read_user_input(self):
+
+        self.input_handler.update_key_states()
+
+        if self.input_handler.q_pressed:
             sys.exit()
         if self.game_active:
-            self.ship.moving_left = self.user_input.left_key_pressed
-            self.ship.moving_right = self.user_input.right_key_pressed
-            if self.user_input.space_key_pressed:
-                self.ship.fire()
+            # TODO
+            self.player.speed = [self.input_handler.right_key_pressed - self.input_handler.left_key_pressed,
+                                 self.input_handler.down_key_pressed - self.input_handler.up_key_pressed]
+            if self.input_handler.space_key_pressed:
+                self.player.fire_weapon()
         else:
             if self.play_button.check_if_clicked():
                 self.begin_game()

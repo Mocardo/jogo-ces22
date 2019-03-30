@@ -1,5 +1,4 @@
 from pygame.sprite import Sprite
-from pygame import Surface
 from weapons.projectiles.abstract_projectile import AbstractProjectile
 
 
@@ -10,15 +9,15 @@ class AbstractWeapon(Sprite):
         super().__init__(self)
 
         self.screen = screen
-        self.image = Surface()  # dummy
+        self.image = None  # dummy
+        self.projectile_group = projectile_group
 
-        self.projectileGroup = projectile_group
-
-        self.damageMultiplier = 1
-        self.speedMultiplier = 1
-        self.fireRate = 1
+        self.damage_multiplier = 1
+        self.speed_multiplier = 1
+        self.fire_rate = 1
 
     def fire(self, current_position, angle):
+        # TODO
         new_projectile = AbstractProjectile(self.screen, current_position, angle,
-                                            self.damageMultiplier, self.speedMultiplier)
-        self.projectileGroup.add(new_projectile)
+                                            self.damage_multiplier, self.speed_multiplier, )
+        self.projectile_group.add(new_projectile)
