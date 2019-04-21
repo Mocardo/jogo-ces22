@@ -2,7 +2,7 @@ import sys
 import pygame
 
 from game_sprites.actors.player import Player
-from game_sprites.actors.enemies.enemy_group import EnemyGroup
+from game_sprites.actors.enemy.enemy_group import EnemyGroup
 from game_sprites.projectiles.projectile_group import ProjectileGroup
 
 from settings import Settings

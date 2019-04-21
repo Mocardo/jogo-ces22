@@ -1,23 +1,34 @@
 from pygame.sprite import Sprite
+import math
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
 class AbstractWeapon(Sprite):
     """Base class for all game weapons."""
+    image = None
+    ammoType = AbstractProjectile
 
-    def __init__(self, screen, projectile_group):
+    def __init__(self, screen, faction):
         super().__init__(self)
 
         self.screen = screen
-        self.image = None  # dummy
-        self.projectile_group = projectile_group
+        self.faction = faction
 
         self.damage_multiplier = 1
         self.speed_multiplier = 1
         self.fire_rate = 1
 
-    def fire(self, current_position, angle):
-        # TODO
-        new_projectile = AbstractProjectile(self.screen, current_position, angle,
-                                            self.damage_multiplier, self.speed_multiplier, )
-        self.projectile_group.add(new_projectile)
+        if self.faction == 1:
+            self.target_angle = math.pi / 2
+        elif self.faction == 2:
+            self.target_angle = - math.pi / 2
+
+        if self.faction == 1:
+            self.position_correction = (0, self.__class__.ammoType.image.get_rect().height/2)
+        elif self.faction == 2:
+            self.position_correction = (0, -self.__class__.ammoType.image.get_rect().height/2)
+
+    def fire(self, starting_position, angle=None):  # TODO: implementar mira
+        new_projectile = self.__class__.ammoType(self.screen, starting_position + self.position_correction,
+                                                 self.target_angle, self.damage_multiplier, self.speed_multiplier)
+        return new_projectile
