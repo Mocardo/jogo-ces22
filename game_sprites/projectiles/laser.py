@@ -1,5 +1,5 @@
 from pygame import Surface
-from weapons.projectiles.abstract_projectile import AbstractProjectile
+from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
 class Laser(AbstractProjectile):

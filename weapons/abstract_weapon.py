@@ -1,5 +1,5 @@
 from pygame.sprite import Sprite
-from weapons.projectiles.abstract_projectile import AbstractProjectile
+from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
 class AbstractWeapon(Sprite):

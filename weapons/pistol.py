@@ -1,6 +1,6 @@
 from pygame import Surface
 from weapons.abstract_weapon import AbstractWeapon
-from weapons.projectiles.bullet import Bullet
+from game_sprites.projectiles.bullet import Bullet
 
 
 class Pistol(AbstractWeapon):

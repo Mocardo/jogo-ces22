@@ -1,4 +1,4 @@
-from actors.actor import Actor
+from game_sprites.actors.actor import Actor
 
 
 class Enemy(Actor):

@@ -1,25 +1,23 @@
 from pygame import Surface
-from pygame.sprite import Sprite
+from game_sprites.game_sprite import GameSprite
 
 
-class Actor(Sprite):
-    image = Surface()
+class Actor(GameSprite):
+    """A base class for the player and enemy"""
 
-    def __init__(self, screen, projectile_group):
-        super(Actor, self).__init__()
+    def __init__(self, screen, starting_position=None):
+        super().__init__(screen, starting_position)
 
-        self.screen = screen
-        self.screen_rect = screen.get_rect()
+        self.rect = self.__class__.image.get_rect()
 
         # Load the ship image and get its rect.
         self.rect = self.image.get_rect()
         self.rect.center = self.screen_rect.center
 
-        self.position = [float(self.rect.center[0]), float(self.rect.center[1])]
+        self.position = [float(i) for i in self.rect.center]
         self.speed = [0, 0]
         self.hp = 100
 
-        self.projectile_group = projectile_group
         self.weapon = None
 
     def update(self):

@@ -1,3 +1,4 @@
+import pygame
 
 
 class CollisionManager:
@@ -12,4 +13,21 @@ class CollisionManager:
         self.enemies = self.enemies
 
     def check_collisions(self):
-        self.enemy_projectiles
+
+
+
+    def check_projectile_enemy_collisions(self):
+        enemy_collisions = pygame.sprite.groupcollide(self.friend_projectiles,
+                                                      self.enemies, True, False)
+        if enemy_collisions:
+            for bullet, enemies_hit in enemy_collisions:
+                for enemy_hit in enemies_hit:
+                    enemy_hit.decrease_life(bullet.damage)
+
+    def check_projectile_player_collisions(self):
+        enemy_collisions = pygame.sprite.groupcollide(self.enemy_projectiles,
+                                                      self.player, True, False)
+        if enemy_collisions:
+            for bullet, enemies_hit in enemy_collisions:
+                for enemy_hit in enemies_hit:
+                    enemy_hit.decrease_life(bullet.damage)

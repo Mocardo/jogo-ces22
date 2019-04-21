@@ -1,6 +1,6 @@
 import pygame.font
 from pygame.sprite import Group
-from actors.player import Ship
+from game_sprites.actors.player import Ship
 from settings import Settings
 
 

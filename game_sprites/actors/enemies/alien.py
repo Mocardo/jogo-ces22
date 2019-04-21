@@ -1,5 +1,5 @@
 import pygame
-from actors.enemies.enemy import Enemy
+from game_sprites.actors.enemies.abstract_enemy import Enemy
 from weapons.pistol import Pistol
 
 
