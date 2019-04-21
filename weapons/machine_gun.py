@@ -1,4 +1,3 @@
-from pygame import Surface
 from weapons.abstract_weapon import AbstractWeapon
 from game_sprites.projectiles.bullet import Bullet
 

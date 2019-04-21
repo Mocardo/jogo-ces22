@@ -1,5 +1,5 @@
-from pygame.sprite import Sprite
 import math
+from pygame.sprite import Sprite
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
@@ -30,5 +30,6 @@ class AbstractWeapon(Sprite):
 
     def fire(self, starting_position, angle=None):  # TODO: implementar mira
         new_projectile = self.__class__.ammoType(self.screen, starting_position + self.position_correction,
-                                                 self.target_angle, self.damage_multiplier, self.speed_multiplier)
+                                                 self.target_angle, self.damage_multiplier,
+                                                 self.speed_multiplier, self.faction)
         return new_projectile
