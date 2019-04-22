@@ -41,7 +41,7 @@ class Game:
 
         # setting BGM
         pygame.mixer.init()
-        pygame.mixer.music.load("sound/魂斗罗 归来剧情模式经典6.mp3")
+        pygame.mixer.music.load("sound/BGM.mp3")
 
     def run(self):
         while True:
