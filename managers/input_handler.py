@@ -3,7 +3,7 @@ import sys
 
 
 class InputHandler:
-    def __init__(self):
+    def __init__(self, game):
         self.q_pressed = False
         self.right_key_pressed = False
         self.left_key_pressed = False
@@ -14,6 +14,23 @@ class InputHandler:
         self.mouse_left_button_pressed = False
         self.mouse_x = 0
         self.mouse_y = 0
+
+        self.game = game
+
+    def parse_user_input(self):
+        self.update_key_states()
+
+        if self.q_pressed:
+            sys.exit()
+        if self.game.game_active:
+            # TODO
+            self.game.player.velocity = [self.right_key_pressed - self.left_key_pressed,
+                                         self.down_key_pressed - self.up_key_pressed]
+            if self.space_key_pressed:
+                self.game.player.fire_weapon(self.game.allied_projectiles)
+        else:
+            if self.game.starting_screen.check_if_clicked(self.mouse_x, self.mouse_y):
+                self.game.begin_game()
 
     def update_key_states(self):
         """Respond to keypresses and mouse events."""

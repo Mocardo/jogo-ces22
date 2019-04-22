@@ -10,9 +10,7 @@ class Painter:
         self.screen = screen
         self.game = game
 
-        self.background = Background(self.screen)
-        self.play_button = Button(self.screen, "Play")
-        self.starting_screen = StartingScreen
+        self.background = Background(screen)
 
     def paint(self):
         """Update images on the screen and flip to the new screen."""
@@ -33,7 +31,7 @@ class Painter:
             # sb.show_score() # TODO
         # Draw the play button if the game is inactive.
         else:
-            self.starting_screen.paint()
+            self.game.starting_screen.paint()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()
