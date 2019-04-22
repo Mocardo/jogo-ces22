@@ -88,9 +88,10 @@ class Game:
         self.allied_projectiles.empty()
         self.enemy_projectiles.empty()
         self.neutral_projectiles.empty()
+        self.drop_group.empty()
 
         # Create a new fleet and center the ship.
-        #self.create_enemies()
+        self.level_generator.create_fleet()
         self.player.move_to_beginning()
 
     """

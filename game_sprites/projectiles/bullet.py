@@ -5,8 +5,8 @@ from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 class Bullet(AbstractProjectile):
     """A class to manage bullets fired by anyone."""
     image = pygame.image.load('images/bullet.png')
-    base_speed = 1
-    base_damage = 1
+    base_speed = 8
+    base_damage = 10
 
     def __init__(self, screen, starting_position, starting_angle, damage_multiplier, speed_multiplier, faction):
         """Create a bullet at a given position moving through a given angle"""

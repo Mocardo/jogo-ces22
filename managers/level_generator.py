@@ -31,12 +31,11 @@ class LevelGenerator:
             dificuldade.append(math.ceil(1 / (0.1 + chi2.cdf(entradas[i], self.nivel))))
             i = i + 1
 
-        print(dificuldade)
         i = 0
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
                 self.create_alien(alien_number, row_number, dificuldade[i])
-                i =i+1
+                i = i+1
 
     def get_number_enemies_x(self, enemy_width):
         """Determine the number of aliens that fit in a row."""
@@ -54,8 +53,9 @@ class LevelGenerator:
         """Create an alien and place it in the row."""
         alien = Alien(self.screen, dificulty)
         alien_width = alien.rect.width
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+
+        alien.set_position([alien_width + 2 * alien_width * alien_number,
+                           alien.rect.height + 2 * alien.rect.height * row_number])
+
         self.enemies.add(alien)
 

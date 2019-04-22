@@ -24,13 +24,13 @@ class CollisionManager:
         neutral_collisions = pygame.sprite.groupcollide(self.enemies, self.neutral_projectiles,
                                                         False, True)
 
-        for enemy_hit, bullets in allied_collisions:
-            for bullet in bullets:
-                enemy_hit.decrease_life(bullet.damage)
+        for enemy_hit in allied_collisions:
+            for bullet in allied_collisions[enemy_hit]:
+                enemy_hit.hp -= bullet.damage
 
-        for enemy_hit, bullets in neutral_collisions:
-            for bullet in bullets:
-                enemy_hit.decrease_life(bullet.damage)
+        for enemy_hit in neutral_collisions:
+            for bullet in neutral_collisions[enemy_hit]:
+                enemy_hit.hp -= bullet.damage
 
     def check_player_projectiles_collisions(self):
         enemy_collisions = pygame.sprite.spritecollide(self.player, self.enemy_projectiles,

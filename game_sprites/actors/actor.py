@@ -17,7 +17,7 @@ class Actor(GameSprite):
         super().__init__(screen)
 
         self.starting_position = [0, 0]
-        self.hp = 100
+        self.hp = 10
         self.weapon = None
 
         self.health_bar = HealthBar(self.hp, self.rect.center)

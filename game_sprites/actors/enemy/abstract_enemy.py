@@ -9,8 +9,8 @@ class AbstractEnemy(Actor):
         """Initialize the enemy and set its starting position."""
         super().__init__(screen)
 
-        self.starting_position = (screen.screen_rect.left + self.__class__.image.get_rect().width//2,
-                                  screen.screen_rect.top + self.__class__.image.get_rect().height//2)
+        self.starting_position = (self.screen_rect.left + self.__class__.image.get_rect().width//2,
+                                  self.screen_rect.top + self.__class__.image.get_rect().height//2)
         self.set_position(self.starting_position)
 
         self.level = level
