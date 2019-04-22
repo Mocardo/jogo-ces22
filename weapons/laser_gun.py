@@ -4,6 +4,7 @@ from game_sprites.projectiles.laser import Laser
 
 class LaserGun(AbstractWeapon):
     """The weapon that fires LAZORS111!!!!1!1!"""
+    "em falta"
     image = None  # TODO
     ammoType = Laser
 

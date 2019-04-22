@@ -1,9 +1,10 @@
+import pygame
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
 class Bullet(AbstractProjectile):
     """A class to manage bullets fired by anyone."""
-    image = None  # TODO
+    image = pygame.image.load('images/bullet.png')
     base_speed = 1
     base_damage = 1
 
