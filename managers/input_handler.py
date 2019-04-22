@@ -1,5 +1,6 @@
 import pygame
 import sys
+from settings import Settings
 
 
 class InputHandler:
@@ -23,8 +24,12 @@ class InputHandler:
         if self.q_pressed:
             sys.exit()
         if self.game.game_active:
-            self.game.player.velocity = [self.right_key_pressed - self.left_key_pressed,
-                                         self.down_key_pressed - self.up_key_pressed]
+            print(Settings.player_speed_factor)
+            self.game.player.velocity = Settings.player_speed_factor * [
+                self.right_key_pressed - self.left_key_pressed,
+                self.down_key_pressed - self.up_key_pressed
+            ]
+
             if self.space_key_pressed:
                 self.game.player.fire_weapon(self.game.allied_projectiles)
             else:
@@ -47,7 +52,7 @@ class InputHandler:
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT:     self.right_key_pressed = True
         elif event.key == pygame.K_LEFT:    self.left_key_pressed = True
-        elif event.key == pygame.K_UP:      self.right_key_pressed = True
+        elif event.key == pygame.K_UP:      self.up_key_pressed = True
         elif event.key == pygame.K_DOWN:    self.down_key_pressed = True
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = True
         elif event.key == pygame.K_q:       self.q_pressed = True
@@ -56,7 +61,7 @@ class InputHandler:
         """Respond to key releases."""
         if event.key == pygame.K_RIGHT:     self.right_key_pressed = False
         elif event.key == pygame.K_LEFT:    self.left_key_pressed = False
-        elif event.key == pygame.K_UP:      self.right_key_pressed = False
+        elif event.key == pygame.K_UP:      self.up_key_pressed = False
         elif event.key == pygame.K_DOWN:    self.down_key_pressed = False
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = False
         elif event.key == pygame.K_q:       self.q_pressed = False
