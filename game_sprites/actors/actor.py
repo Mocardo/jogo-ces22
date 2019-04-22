@@ -16,6 +16,7 @@ class Actor(GameSprite):
         super().__init__(screen)
 
         self.starting_position = [0, 0]
+        self.maxhp = 10
         self.hp = 10
         self.weapon = None
 
@@ -45,4 +46,5 @@ class Actor(GameSprite):
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
-        self.health_bar.draw_health_bar(self)
+        self.health_bar.update()
+        self.health_bar.draw_health_bar()
