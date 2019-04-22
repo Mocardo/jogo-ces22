@@ -25,7 +25,6 @@ class Actor(GameSprite):
     def update(self):
         super().update()
 
-        # TODO: ver Clamp
         if self.rect.left < self.screen_rect.left:
             self.rect.left = self.screen_rect.left
         if self.rect.right > self.screen_rect.right:

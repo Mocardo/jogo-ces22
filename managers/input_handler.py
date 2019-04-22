@@ -29,7 +29,7 @@ class InputHandler:
             if self.space_key_pressed:
                 self.game.player.fire_weapon(self.game.allied_projectiles)
         else:
-            if self.game.starting_screen.check_if_clicked(self.mouse_x, self.mouse_y):
+            if self.mouse_left_button_pressed and self.game.starting_screen.check_if_started(self.mouse_x, self.mouse_y):
                 self.game.begin_game()
 
     def update_key_states(self):
@@ -40,7 +40,7 @@ class InputHandler:
             elif event.type == pygame.KEYUP:                self.check_keyup_events(event)
 
         self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
-        self.mouse_left_button_pressed = pygame.mouse.get_pressed()[1]
+        self.mouse_left_button_pressed = pygame.mouse.get_pressed()[0]
 
     def check_keydown_events(self, event):
         """Respond to keypresses."""

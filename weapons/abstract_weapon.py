@@ -10,7 +10,7 @@ class AbstractWeapon(Sprite):
     ammoType = AbstractProjectile
 
     def __init__(self, screen, faction):
-        super().__init__(self)
+        super().__init__()
 
         self.screen = screen
         self.faction = faction
@@ -21,13 +21,14 @@ class AbstractWeapon(Sprite):
 
         if self.faction == Faction.Enemy:
             self.target_angle = - math.pi / 2
-            self.position_correction = (0, - self.__class__.ammoType.image.get_rect().height//2)
+            self.position_correction = (0, self.__class__.ammoType.image.get_rect().height//2)
         else:
             self.target_angle = math.pi / 2
-            self.position_correction = (0, self.__class__.ammoType.image.get_rect().height//2)
+            self.position_correction = (0, - self.__class__.ammoType.image.get_rect().height//2)
 
     def fire(self, starting_position, angle=None):  # TODO: implementar mira
-        new_projectile = self.__class__.ammoType(self.screen, starting_position + self.position_correction,
+        new_projectile = self.__class__.ammoType(self.screen,
+                                                 list(map(sum, zip(starting_position, self.position_correction))),
                                                  self.target_angle, self.damage_multiplier,
                                                  self.speed_multiplier, self.faction)
         return new_projectile

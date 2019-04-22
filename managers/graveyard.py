@@ -1,5 +1,4 @@
-import pygame
-from game_sprites.drop import Drop
+from game_sprites.drops.drop import Drop
 
 
 class Graveyard:

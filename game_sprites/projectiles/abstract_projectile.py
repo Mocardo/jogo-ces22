@@ -20,5 +20,5 @@ class AbstractProjectile(GameSprite):
 
     def update(self):
         """Move the bullet through the screen."""
-        self.velocity = self.speed * [math.cos(self.angle), math.sin(self.angle)]
+        self.velocity = self.speed * [math.cos(self.angle), - math.sin(self.angle)]
         super().update()

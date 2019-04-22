@@ -1,10 +1,9 @@
-from pygame.sprite import Group
+from game_sprites.game_sprite_group import GameSpriteGroup
 
 
-class ProjectileGroup(Group):
+class ProjectileGroup(GameSpriteGroup):
     def __init__(self, screen):
-        super().__init__(self)
-        self.screen = screen
+        super().__init__(screen)
 
     def update(self):
         for projectile in self.sprites():

@@ -2,13 +2,12 @@ import sys
 import pygame
 
 from game_sprites.actors.player import Player
-from game_sprites.actors.enemy.alien import Alien
 from game_sprites.actors.enemy.enemy_group import EnemyGroup
 from game_sprites.projectiles.projectile_group import ProjectileGroup
+from game_sprites.drops.drop_group import DropGroup
 
 from settings import Settings
 from game_stats import GameStats
-from scoreboard import Scoreboard
 from managers.input_handler import InputHandler
 from graphical_elements.painter import Painter
 from managers.collision_manager import CollisionManager
@@ -25,18 +24,17 @@ class Game:
         pygame.display.set_caption("Chen Invaders")
 
         self.stats = GameStats()
-        self.sb = Scoreboard(self.screen, self.stats)
+        # self.sb = Scoreboard(self.screen, self.stats)
 
         # Make a ship, a group of projectiles, and a group of aliens.
 
         self.allied_projectiles = ProjectileGroup(self.screen)
         self.enemy_projectiles = ProjectileGroup(self.screen)
         self.neutral_projectiles = ProjectileGroup(self.screen)
+        self.drop_group = DropGroup(self.screen)
 
         self.player = Player(self.screen)
         self.enemies = EnemyGroup(self.screen)
-
-        self.drop_group = pygame.sprite.Group()
 
         self.collision_manager = CollisionManager(self)
         self.graveyard = Graveyard(self)
@@ -58,6 +56,7 @@ class Game:
             if self.game_active:
                 self.player.update()
                 self.enemies.update()
+                self.drop_group.update()
                 self.allied_projectiles.update()
                 self.enemy_projectiles.update()
                 self.neutral_projectiles.update()

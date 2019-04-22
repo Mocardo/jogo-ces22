@@ -18,12 +18,12 @@ class Painter:
             self.background.blitme()
             self.background.blitme2()
 
-            self.game.drop_group.blitme()
             self.game.enemies.blitme()
-            self.game.ship.blitme()
+            self.game.drop_group.blitme()
             self.game.enemy_projectiles.blitme()
             self.game.neutral_projectiles.blitme()
             self.game.allied_projectiles.blitme()
+            self.game.player.blitme()
 
             # Draw the score information.
             # sb.show_score() # TODO

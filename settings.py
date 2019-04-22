@@ -16,6 +16,8 @@ class Settings:
     # Alien settings
     fleet_drop_speed = 10
 
+    drop_speed_factor = 1
+
     # Scoring
     alien_points = 50
 

@@ -7,7 +7,7 @@ class GameSprite(Sprite):
     image = None
 
     def __init__(self, screen):
-        super().__init__(self)
+        super().__init__()
 
         # Set screen reference
         self.screen = screen
@@ -25,7 +25,7 @@ class GameSprite(Sprite):
         self.set_position([0.0, 0.0])
 
     def update(self):
-        new_position = self.position + self.velocity
+        new_position = list(map(sum, zip(self.position, self.velocity)))
         self.set_position(new_position)
 
     def set_position(self, new_position):

@@ -13,8 +13,8 @@ class Player(Actor):
         super().__init__(screen)
 
         # Start each new ship at the bottom center of the screen.
-        self.starting_position = (screen.screen_rect.centerx,
-                                  screen.screen_rect.bottom - self.__class__.image.get_rect().height//2)
+        self.starting_position = (self.screen_rect.centerx,
+                                  self.screen_rect.bottom - self.__class__.image.get_rect().height//2)
         self.set_position(self.starting_position)
 
         self.weapon = Pistol(self.screen, self.__class__.faction)
