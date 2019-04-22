@@ -9,5 +9,5 @@ class ProjectileGroup(Group):
     def update(self):
         for projectile in self.sprites():
             projectile.update()
-            if not projectile.is_on_screen(self.screen):
+            if not projectile.is_on_screen():
                 self.remove(projectile)

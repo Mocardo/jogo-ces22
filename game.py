@@ -10,7 +10,7 @@ from game_stats import GameStats
 from scoreboard import Scoreboard
 from input_handler import InputHandler
 from graphical_elements.painter import Painter
-from collision_manager import CollisionManager
+from managers.collision_manager import CollisionManager
 
 
 class Game:
@@ -25,12 +25,12 @@ class Game:
 
         # Make a ship, a group of projectiles, and a group of aliens.
 
-        self.friend_projectiles = ProjectileGroup(self.screen)
+        self.allied_projectiles = ProjectileGroup(self.screen)
         self.enemy_projectiles = ProjectileGroup(self.screen)
         self.neutral_projectiles = ProjectileGroup(self.screen)
 
-        self.player = Player(self.screen, self.friend_projectiles)
-        self.enemies = EnemyGroup(self.screen, self.enemy_projectiles)
+        self.player = Player(self.screen)
+        self.enemies = EnemyGroup(self.screen)
 
         self.collision_manager = CollisionManager(self)
 
@@ -49,7 +49,7 @@ class Game:
             if self.game_active:
                 self.player.update()
                 self.enemies.update()
-                self.friend_projectiles.update()
+                self.allied_projectiles.update()
                 self.enemy_projectiles.update()
                 self.collision_manager.check_collisions()
                 if pygame.mixer.music.get_busy() == False:
@@ -57,7 +57,6 @@ class Game:
             self.painter.paint()
 
     def read_user_input(self):
-
         self.input_handler.update_key_states()
 
         if self.input_handler.q_pressed:

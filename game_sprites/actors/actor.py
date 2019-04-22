@@ -32,6 +32,9 @@ class Actor(GameSprite):
         if self.rect.bottom > self.screen_rect.bottom:
             self.rect.bottom = self.screen_rect.bottom
 
+    def die(self):
+        self.kill()
+
     def fire_weapon(self):
         return self.weapon.fire(self.rect.midtop)
 

@@ -2,10 +2,10 @@ from pygame.sprite import Group
 
 
 class EnemyGroup(Group):
-    def __init__(self, screen, projectile_group):
+    def __init__(self, screen):
         super().__init__(self)
         self.screen = screen
-        self.projectile_group = projectile_group
 
     def update(self):
-        pass  # TODO
+        for enemy in self.sprites():
+            enemy.update()
