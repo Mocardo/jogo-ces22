@@ -1,16 +1,14 @@
 from graphical_elements.background import Background
-from graphical_elements.button import Button
-from graphical_elements.starting_screen import StartingScreen
 import pygame
 
 
 class Painter:
 
-    def __init__(self, screen, game):
-        self.screen = screen
+    def __init__(self, game):
+        self.screen = game.screen
         self.game = game
 
-        self.background = Background(screen)
+        self.background = Background(self.screen)
 
     def paint(self):
         """Update images on the screen and flip to the new screen."""

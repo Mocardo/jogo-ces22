@@ -13,6 +13,7 @@ from managers.input_handler import InputHandler
 from graphical_elements.painter import Painter
 from managers.collision_manager import CollisionManager
 from managers.graveyard import Graveyard
+from managers.level_generator import LevelGenerator
 from graphical_elements.starting_screen import StartingScreen
 
 
@@ -39,10 +40,11 @@ class Game:
 
         self.collision_manager = CollisionManager(self)
         self.graveyard = Graveyard(self)
+        self.level_generator = LevelGenerator(self)
 
         self.input_handler = InputHandler(self)
         self.starting_screen = StartingScreen(self.screen)
-        self.painter = Painter(self.screen, self)
+        self.painter = Painter(self)
 
         self.game_active = False
 
