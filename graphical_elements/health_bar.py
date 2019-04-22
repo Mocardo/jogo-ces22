@@ -1,16 +1,31 @@
-import pygame.draw_py
-from pygame import Rect
+import pygame
+from pygame.sprite import Sprite
 
 
-class HealthBar:
-    def __init__(self, hp, actor_position):
-        self.hp = hp
-        self.actor_position = actor_position
+class HealthBar(Sprite):
 
-        self.base_rect = Rect(*actor_position, 20, 4)
+    def __init__(self, screen, actor):
+        """Create an object HealthBar"""
+        super(HealthBar, self).__init__()
+        self.screen = screen
 
-    def update_base_rect(self):
-        self.base_rect.center = (self.actor_position + (0, 5))
+        # Create a rectangle for health bar in (0, 0) and set its position
+        self.rect = pygame.Rect(0, 0, 20, 4)
+        self.rect.centerx = actor.rect.centerx
+        self.rect.top = actor.rect.top + 5
 
-    def blitme(self):
-        pass  # TODO
+        # set value of hp and its color
+        self.hp = actor.hp
+        #self.red = 255, 0, 0
+        self.color = 0, 255, 0
+
+    def update(self, actor):
+        self.rect.centerx = actor.rect.centerx
+        self.rect.top = actor.rect.top + 5
+        self.hp = actor.hp
+
+    def draw_health_bar(self, actor):
+        rect = self.rect
+        rect.width = actor.hp * 20
+        rect.left = self.rect.left
+        pygame.draw.rect(self.screen, self.color, rect)

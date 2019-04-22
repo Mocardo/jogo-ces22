@@ -2,7 +2,6 @@ from enum import Enum
 from game_sprites.game_sprite import GameSprite
 from graphical_elements.health_bar import HealthBar
 
-
 class Faction(Enum):
     Neutral = 0
     Allied = 1
@@ -20,7 +19,7 @@ class Actor(GameSprite):
         self.hp = 10
         self.weapon = None
 
-        self.health_bar = HealthBar(self.hp, self.rect.center)
+        self.health_bar = HealthBar(screen, self)
 
     def update(self):
         super().update()
@@ -46,4 +45,4 @@ class Actor(GameSprite):
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
-        self.health_bar.blitme()
+        self.health_bar.draw_health_bar(self)
