@@ -1,9 +1,10 @@
+import pygame
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
 class Laser(AbstractProjectile):
     """A class to represent LAZ0RS!!!1!!1 fired by anyone."""
-    image = None  # TODO
+    image = pygame.image.load('images/lazer.png')
     base_speed = 1
     base_damage = 1
 
