@@ -1,12 +1,13 @@
 import pygame
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
+from settings import Settings
 
 
 class Bullet(AbstractProjectile):
     """A class to manage bullets fired by anyone."""
     image = pygame.image.load('images/bullet.png')
-    base_speed = 8
-    base_damage = 3
+    base_speed = Settings.bullet_base_speed
+    base_damage = Settings.bullet_base_damage
 
     def __init__(self, screen, starting_position, starting_angle, damage_multiplier, speed_multiplier, faction):
         """Create a bullet at a given position moving through a given angle"""

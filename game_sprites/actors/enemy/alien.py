@@ -1,6 +1,7 @@
 import pygame
 from game_sprites.actors.enemy.abstract_enemy import AbstractEnemy
 from weapons.pistol import Pistol
+from settings import Settings
 
 
 class Alien(AbstractEnemy):
@@ -10,5 +11,9 @@ class Alien(AbstractEnemy):
     def __init__(self, screen, level):
         """Initialize the alien and set its starting position."""
         super().__init__(screen, level)
+
+        self.maxhp = Settings.alien_max_hp
+        self.hp = self.maxhp
+        self.speed = Settings.alien_base_speed
 
         self.weapon = Pistol(self.screen, self.__class__.faction)

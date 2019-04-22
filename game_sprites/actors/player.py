@@ -1,6 +1,7 @@
 import pygame
 from game_sprites.actors.actor import Actor
 from game_sprites.actors.actor import Faction
+from settings import Settings
 from weapons.pistol import Pistol
 
 
@@ -17,6 +18,9 @@ class Player(Actor):
                                   self.screen_rect.bottom - self.__class__.image.get_rect().height//2)
         self.set_position(self.starting_position)
 
+        self.maxhp = Settings.player_max_hp
+        self.hp = self.maxhp
+        self.speed = Settings.player_base_speed
         self.weapon = Pistol(self.screen, self.__class__.faction)
 
     def cooldown_weapon(self):

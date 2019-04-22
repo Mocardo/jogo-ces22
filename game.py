@@ -74,7 +74,6 @@ class Game:
         pygame.mouse.set_visible(False)
 
         # Reset the game statistics.
-        self.stats.reset_stats()
         self.game_active = True
 
         # Reset the scoreboard images.

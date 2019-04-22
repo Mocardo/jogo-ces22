@@ -16,6 +16,7 @@ class Graveyard:
                 self.game.drop_group.add(Drop(self.screen, enemy.position))
                 enemy.die()
 
+
     def check_player_death(self):
         if self.game.player.hp <= 0:
             self.game.end_game()

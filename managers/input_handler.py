@@ -34,7 +34,7 @@ class InputHandler:
             int(self.right_key_pressed) - int(self.left_key_pressed),
             int(self.down_key_pressed) - int(self.up_key_pressed)
         ]
-        self.game.player.velocity = [Settings.player_speed_factor * i for i in self.game.player.velocity]
+        self.game.player.velocity = [self.game.player.speed * i for i in self.game.player.velocity]
 
         if self.space_key_pressed:
             self.game.player.fire_weapon(self.game.allied_projectiles)

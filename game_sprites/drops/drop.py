@@ -17,7 +17,7 @@ class Drop(GameSprite):
     def update(self):
         """Move the drop down the screen."""
         # Update the decimal position of the drop.
-        self.velocity[1] += Settings.drop_speed_factor
+        self.velocity[1] += Settings.drop_acceleration
         # Update the drop position.
         super().update()
 
