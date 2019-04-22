@@ -17,6 +17,7 @@ class Painter:
         if self.game.game_active:
             self.background.blitme()
             self.background.blitme2()
+            self.background.update()
 
             self.game.enemies.blitme()
             self.game.drop_group.blitme()
