@@ -6,15 +6,17 @@ class CollisionManager:
         self.game = game
         self.screen = game.screen
 
-        self.allied_projectiles = self.game.allied_projectiles
-        self.enemy_projectiles = self.game.enemy_projectiles
-        self.neutral_projectiles = self.game.neutral_projectiles
-        self.player = self.game.player
-        self.enemies = self.game.enemies
+        self.allied_projectiles = game.allied_projectiles
+        self.enemy_projectiles = game.enemy_projectiles
+        self.neutral_projectiles = game.neutral_projectiles
+        self.player = game.player
+        self.enemies = game.enemies
+        self.drop_group = game.drop_group
 
     def check_collisions(self):
         self.check_enemies_projectiles_collisions()
         self.check_player_projectiles_collisions()
+        self.check_player_drop_collision()
 
     def check_enemies_projectiles_collisions(self):
         allied_collisions = pygame.sprite.groupcollide(self.enemies, self.allied_projectiles,
@@ -41,3 +43,10 @@ class CollisionManager:
 
         for bullet in neutral_collisions:
             self.player.decrease_life(bullet.damage)
+
+    def check_player_drop_collision(self):
+        drop_colisions = pygame.sprite.spritecollide(self.player, self.drop_group, True)
+        # TODO run sound
+
+        for drop in drop_colisions:
+            pass  # TODO aumentar pontos

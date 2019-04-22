@@ -1,4 +1,5 @@
 import pygame
+from game_sprites.drop import Drop
 
 
 class Graveyard:
@@ -6,19 +7,17 @@ class Graveyard:
         self.game = game
         self.screen = game.screen
 
-        self.player = self.game.player
-        self.enemies = self.game.enemies
-
     def check_deaths(self):
         self.check_enemy_deaths()
         self.check_player_death()
 
     def check_enemy_deaths(self):
-        for enemy in self.enemies:
+        for enemy in self.game.enemies:
             if enemy.hp <= 0:
+                self.game.drop_group.add(Drop(self.screen, enemy.position))
                 enemy.die()
 
     def check_player_death(self):
-        if self.player.hp <= 0:
+        if self.game.player.hp <= 0:
             self.game.game_active = False
             pygame.mouse.set_visible(True)

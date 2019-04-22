@@ -11,6 +11,7 @@ from scoreboard import Scoreboard
 from input_handler import InputHandler
 from graphical_elements.painter import Painter
 from managers.collision_manager import CollisionManager
+from managers.graveyard import Graveyard
 
 
 class Game:
@@ -32,7 +33,10 @@ class Game:
         self.player = Player(self.screen)
         self.enemies = EnemyGroup(self.screen)
 
+        self.drop_group = pygame.sprite.Group()
+
         self.collision_manager = CollisionManager(self)
+        self.graveyard = Graveyard(self)
 
         self.input_handler = InputHandler()
         self.painter = Painter(self)
@@ -47,14 +51,19 @@ class Game:
         while True:
             self.read_user_input()
             if self.game_active:
-                self.player.update()
-                self.enemies.update()
-                self.allied_projectiles.update()
-                self.enemy_projectiles.update()
+                self.update()
                 self.collision_manager.check_collisions()
-                if pygame.mixer.music.get_busy() == False:
+                self.graveyard.check_deaths()
+                if not pygame.mixer.music.get_busy():
                     pygame.mixer.music.play()
             self.painter.paint()
+
+    def update(self):
+        self.player.update()
+        self.enemies.update()
+        self.allied_projectiles.update()
+        self.enemy_projectiles.update()
+        self.neutral_projectiles.update()
 
     def read_user_input(self):
         self.input_handler.update_key_states()
@@ -63,8 +72,8 @@ class Game:
             sys.exit()
         if self.game_active:
             # TODO
-            self.player.speed = [self.input_handler.right_key_pressed - self.input_handler.left_key_pressed,
-                                 self.input_handler.down_key_pressed - self.input_handler.up_key_pressed]
+            self.player.velocity = [self.input_handler.right_key_pressed - self.input_handler.left_key_pressed,
+                                    self.input_handler.down_key_pressed - self.input_handler.up_key_pressed]
             if self.input_handler.space_key_pressed:
                 self.player.fire_weapon()
         else:

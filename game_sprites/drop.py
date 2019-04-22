@@ -1,19 +1,19 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Drop(Sprite):
     """A class to manage drop item."""
+    image = pygame.image.load('images/drop.png')
 
-    def __init__(self, screen, alien):
+    def __init__(self, screen, position):
         """Create a drop object at the alien's current position."""
-        super(Drop, self).__init__()
+        super().__init__()
         self.screen = screen
 
         # Load the drop image and set its rect attribute.
-        self.image = pygame.image.load('images/drop.png')
-        self.rect = self.image.get_rect()
-        self.rect.centerx = alien.rect.centerx
-        self.rect.contery = alien.rect.centery
+        self.rect = self.__class__.image.get_rect()
+        self.rect.center = [int(i) for i in position]
 
         # Store the drops's speed as a decimal value.
         self.y = float(self.rect.y)
@@ -27,8 +27,10 @@ class Drop(Sprite):
         # Update the drop speed factor.
         self.speed_factor += 0.1
         # Update the drop position.
-        self.rect.y = self.y
+        self.rect.y = int(self.y)
+        if self.rect.top > self.screen.bottom:
+            self.kill()
 
-    def draw_drop(self):
+    def blitme(self):
         """Draw the drop to the screen."""
-        pygame.draw.rect(self.image, self.rect)
+        self.screen.blit(self.image, self.rect)
