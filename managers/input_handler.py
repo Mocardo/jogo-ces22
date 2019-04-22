@@ -11,6 +11,7 @@ class InputHandler:
         self.up_key_pressed = False
         self.down_key_pressed = False
         self.space_key_pressed = False
+        self.enter_key_pressed = False
 
         self.mouse_left_button_pressed = False
         self.mouse_x = 0
@@ -24,19 +25,27 @@ class InputHandler:
         if self.q_pressed:
             sys.exit()
         if self.game.game_active:
-            self.game.player.velocity = [
-                int(self.right_key_pressed) - int(self.left_key_pressed),
-                int(self.down_key_pressed) - int(self.up_key_pressed)
-            ]
-            self.game.player.velocity = [Settings.player_speed_factor * i for i in self.game.player.velocity]
-
-            if self.space_key_pressed:
-                self.game.player.fire_weapon(self.game.allied_projectiles)
-            else:
-                self.game.player.cooldown_weapon()
+            self.active_game_controls()
         else:
-            if self.mouse_left_button_pressed and self.game.starting_screen.check_if_started(self.mouse_x, self.mouse_y):
-                self.game.begin_game()
+            self.inactive_game_controls()
+
+    def active_game_controls(self):
+        self.game.player.velocity = [
+            int(self.right_key_pressed) - int(self.left_key_pressed),
+            int(self.down_key_pressed) - int(self.up_key_pressed)
+        ]
+        self.game.player.velocity = [Settings.player_speed_factor * i for i in self.game.player.velocity]
+
+        if self.space_key_pressed:
+            self.game.player.fire_weapon(self.game.allied_projectiles)
+        else:
+            self.game.player.cooldown_weapon()
+
+    def inactive_game_controls(self):
+        if (self.mouse_left_button_pressed and self.game.starting_screen.check_if_started(self.mouse_x, self.mouse_y))\
+                or self.space_key_pressed or self.enter_key_pressed:
+            self.game.begin_game()
+            self.space_key_pressed = False
 
     def update_key_states(self):
         """Respond to keypresses and mouse events."""
@@ -56,6 +65,7 @@ class InputHandler:
         elif event.key == pygame.K_DOWN:    self.down_key_pressed = True
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = True
         elif event.key == pygame.K_q:       self.q_pressed = True
+        elif event.key == pygame.K_RETURN:  self.enter_key_pressed = True
 
     def check_keyup_events(self, event):
         """Respond to key releases."""
@@ -65,3 +75,4 @@ class InputHandler:
         elif event.key == pygame.K_DOWN:    self.down_key_pressed = False
         elif event.key == pygame.K_SPACE:   self.space_key_pressed = False
         elif event.key == pygame.K_q:       self.q_pressed = False
+        elif event.key == pygame.K_RETURN:  self.enter_key_pressed = False
