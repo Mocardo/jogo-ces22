@@ -19,6 +19,8 @@ class AbstractWeapon(Sprite):
         self.speed_multiplier = 1
         self.fire_rate = 1
 
+        self.ready = True
+
         if self.faction == Faction.Enemy:
             self.target_angle = - math.pi / 2
             self.position_correction = (0, self.__class__.ammoType.image.get_rect().height//2)
@@ -31,4 +33,11 @@ class AbstractWeapon(Sprite):
                                                  list(map(sum, zip(starting_position, self.position_correction))),
                                                  self.target_angle, self.damage_multiplier,
                                                  self.speed_multiplier, self.faction)
+        self.ready = False
         return new_projectile
+
+    def weapon_ready(self):
+        return self.ready
+
+    def cooldown(self):
+        self.ready = True

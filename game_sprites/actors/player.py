@@ -18,3 +18,10 @@ class Player(Actor):
         self.set_position(self.starting_position)
 
         self.weapon = Pistol(self.screen, self.__class__.faction)
+
+    def cooldown_weapon(self):
+        self.weapon.cooldown()
+
+    def fire_weapon(self, projectile_group):
+        if self.weapon.weapon_ready():
+            projectile_group.add(self.weapon.fire(self.rect.midtop))

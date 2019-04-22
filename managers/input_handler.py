@@ -23,11 +23,12 @@ class InputHandler:
         if self.q_pressed:
             sys.exit()
         if self.game.game_active:
-            # TODO
             self.game.player.velocity = [self.right_key_pressed - self.left_key_pressed,
                                          self.down_key_pressed - self.up_key_pressed]
             if self.space_key_pressed:
                 self.game.player.fire_weapon(self.game.allied_projectiles)
+            else:
+                self.game.player.cooldown_weapon()
         else:
             if self.mouse_left_button_pressed and self.game.starting_screen.check_if_started(self.mouse_x, self.mouse_y):
                 self.game.begin_game()
