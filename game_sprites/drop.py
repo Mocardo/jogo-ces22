@@ -31,4 +31,4 @@ class Drop(Sprite):
 
     def draw_drop(self):
         """Draw the drop to the screen."""
-        pygame.draw.rect(self.image, self.rect)
+        pygame.draw.rect(self.image, self.rect)5
