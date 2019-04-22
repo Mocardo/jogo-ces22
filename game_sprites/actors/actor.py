@@ -1,10 +1,16 @@
+from enum import Enum
 from game_sprites.game_sprite import GameSprite
+
+
+class Faction(Enum):
+    Neutral = 0
+    Allied = 1
+    Enemy = 2
 
 
 class Actor(GameSprite):
     """A base class for the player and enemy"""
-    # TODO: create an enum for Faction
-    faction = None
+    faction = Faction.Neutral
 
     def __init__(self, screen):
         super().__init__(screen)
