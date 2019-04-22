@@ -19,5 +19,4 @@ class Graveyard:
 
     def check_player_death(self):
         if self.game.player.hp <= 0:
-            self.game.game_active = False
-            pygame.mouse.set_visible(True)
+            self.game.end_game()
