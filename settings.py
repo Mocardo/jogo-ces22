@@ -16,7 +16,7 @@ class Settings:
     # Alien settings
     fleet_drop_speed = 10
 
-    player_speed_factor = 100
+    player_speed_factor = 10
 
     drop_speed_factor = 1
 

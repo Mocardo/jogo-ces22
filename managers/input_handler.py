@@ -24,11 +24,11 @@ class InputHandler:
         if self.q_pressed:
             sys.exit()
         if self.game.game_active:
-            print(Settings.player_speed_factor)
-            self.game.player.velocity = Settings.player_speed_factor * [
-                self.right_key_pressed - self.left_key_pressed,
-                self.down_key_pressed - self.up_key_pressed
+            self.game.player.velocity = [
+                int(self.right_key_pressed) - int(self.left_key_pressed),
+                int(self.down_key_pressed) - int(self.up_key_pressed)
             ]
+            self.game.player.velocity = [Settings.player_speed_factor * i for i in self.game.player.velocity]
 
             if self.space_key_pressed:
                 self.game.player.fire_weapon(self.game.allied_projectiles)
