@@ -1,5 +1,6 @@
 import math
 from pygame.sprite import Sprite
+from game_sprites.actors.actor import Faction
 from game_sprites.projectiles.abstract_projectile import AbstractProjectile
 
 
@@ -18,15 +19,12 @@ class AbstractWeapon(Sprite):
         self.speed_multiplier = 1
         self.fire_rate = 1
 
-        if self.faction == 1:
-            self.target_angle = math.pi / 2
-        elif self.faction == 2:
+        if self.faction == Faction.Enemy:
             self.target_angle = - math.pi / 2
-
-        if self.faction == 1:
-            self.position_correction = (0, self.__class__.ammoType.image.get_rect().height/2)
-        elif self.faction == 2:
-            self.position_correction = (0, -self.__class__.ammoType.image.get_rect().height/2)
+            self.position_correction = (0, - self.__class__.ammoType.image.get_rect().height//2)
+        else:
+            self.target_angle = math.pi / 2
+            self.position_correction = (0, self.__class__.ammoType.image.get_rect().height//2)
 
     def fire(self, starting_position, angle=None):  # TODO: implementar mira
         new_projectile = self.__class__.ammoType(self.screen, starting_position + self.position_correction,
