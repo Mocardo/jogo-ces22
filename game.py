@@ -43,17 +43,23 @@ class Game:
 
         self.starting_screen = StartingScreen(self.screen)
         self.painter = Painter(self)
-
         self.game_state = GameState.game_inactive
 
         self.clock = pygame.time.Clock()
         self.time_until_next_horde = 0
 
-        # setting BGM
-        pygame.mixer.init()
-        pygame.mixer.music.load("sound/BGM.mp3")
-
     def run(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("sound/start.mp3")
+        while True:
+            self.input_handler.parse_user_input()
+            if self.game_state == GameState.game_active or self.game_state == GameState.game_level_passed:
+                break
+            else:
+                if not pygame.mixer.music.get_busy():
+                    pygame.mixer.music.play()
+            self.painter.paint()
+        pygame.mixer.music.load("sound/BGM.mp3")
         while True:
             self.input_handler.parse_user_input()
             if self.game_state == GameState.game_active:
