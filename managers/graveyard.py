@@ -23,9 +23,6 @@ class Graveyard:
             self.game.game_state = GameState.game_level_passed
             self.game.clock.tick()
 
-
-
-
     def check_player_death(self):
         if self.game.player.hp <= 0:
             self.game.end_game()

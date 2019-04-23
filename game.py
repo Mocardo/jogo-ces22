@@ -51,24 +51,14 @@ class Game:
 
         self.game_state = GameState.game_inactive
 
+        pygame.mixer.music.load("sound/start.mp3")
+        pygame.mixer.music.play()
+
         self.clock = pygame.time.Clock()
         self.time_until_next_horde = 0
         pygame.mixer.init()
 
-
-
     def run(self):
-
-        pygame.mixer.music.load("sound/start.mp3")
-        while True:
-            self.input_handler.parse_user_input()
-            if self.game_state == GameState.game_active or self.game_state == GameState.game_level_passed:
-                break
-            else:
-                if not pygame.mixer.music.get_busy():
-                    pygame.mixer.music.play()
-            self.painter.paint()
-        pygame.mixer.music.load("sound/BGM.mp3")
         while True:
             self.input_handler.parse_user_input()
             if self.game_state == GameState.game_active:
@@ -82,8 +72,6 @@ class Game:
                 self.collision_manager.check_collisions()
                 self.graveyard.check_deaths()
                 self.explosion_group.update()
-                if not pygame.mixer.music.get_busy():
-                    pygame.mixer.music.play()
             elif self.game_state == GameState.game_level_passed:
                 self.player.update()
                 self.enemies.update()
@@ -93,8 +81,6 @@ class Game:
                 self.neutral_projectiles.update()
                 self.collision_manager.check_collisions()
                 self.explosion_group.update()
-                if not pygame.mixer.music.get_busy():
-                    pygame.mixer.music.play()
                 self.level_ended()
             self.painter.paint()
 
@@ -108,6 +94,9 @@ class Game:
         # sb.prep_high_score()
         # sb.prep_level()
         # sb.prep_ships()
+
+        pygame.mixer.music.load("sound/BGM.mp3")
+        pygame.mixer.music.play()
 
         self.begin_level()
 
@@ -165,4 +154,15 @@ class Game:
         else:
             """
         self.game_state = GameState.game_inactive
+
+        self.enemies.empty()
+        self.allied_projectiles.empty()
+        self.enemy_projectiles.empty()
+        self.neutral_projectiles.empty()
+        self.drop_group.empty()
+        self.explosion_group.empty()
+
+        pygame.mixer.music.load("sound/start.mp3")
+        pygame.mixer.music.play()
+
         pygame.mouse.set_visible(True)
