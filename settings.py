@@ -1,4 +1,12 @@
 
+from enum import Enum
+
+
+class GameState(Enum):
+    game_inactive = 0
+    game_active = 1
+    game_level_passed = 2
+
 
 class Settings:
     """A class to store all settings for Alien Invasion."""
@@ -36,6 +44,8 @@ class Settings:
     # How quickly the alien point values increase
     score_scale = 1.5
     """
+
+    next_level_delay = 3000
 
     def __init__(self):
         pass

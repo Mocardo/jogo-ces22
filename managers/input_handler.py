@@ -1,6 +1,7 @@
 import pygame
 import sys
 from settings import Settings
+from settings import GameState
 
 
 class InputHandler:
@@ -24,7 +25,9 @@ class InputHandler:
 
         if self.q_pressed:
             sys.exit()
-        if self.game.game_active:
+        if self.game.game_state == GameState.game_active:
+            self.active_game_controls()
+        elif self.game.game_state == GameState.game_level_passed:
             self.active_game_controls()
         else:
             self.inactive_game_controls()

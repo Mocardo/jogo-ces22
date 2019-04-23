@@ -5,7 +5,7 @@ from game_sprites.actors.player import Player
 from game_sprites.actors.enemy.enemy_group import EnemyGroup
 from game_sprites.projectiles.projectile_group import ProjectileGroup
 from game_sprites.drops.drop_group import DropGroup
-
+from settings import GameState
 from settings import Settings
 from game_stats import GameStats
 from managers.input_handler import InputHandler
@@ -44,7 +44,9 @@ class Game:
         self.starting_screen = StartingScreen(self.screen)
         self.painter = Painter(self)
 
-        self.game_active = False
+        self.game_state = GameState.game_inactive
+        self.clock = pygame.time.Clock()
+        self.time0 = 0
 
         # setting BGM
         pygame.mixer.init()
@@ -53,7 +55,7 @@ class Game:
     def run(self):
         while True:
             self.input_handler.parse_user_input()
-            if self.game_active:
+            if self.game_state == GameState.game_active or self.game_state == GameState.game_level_passed:
                 self.player.update()
                 self.enemies.update()
                 self.drop_group.update()
@@ -61,20 +63,23 @@ class Game:
                 self.enemy_projectiles.update()
                 self.neutral_projectiles.update()
                 self.collision_manager.check_collisions()
-                self.graveyard.check_deaths()
+                if self.game_state == GameState.game_active:
+                    self.graveyard.check_deaths()
+                elif self.game_state == GameState.game_level_passed:
+                    self.level_ended()
                 if not pygame.mixer.music.get_busy():
                     pygame.mixer.music.play()
+            else:
+                pass
             self.painter.paint()
 
     def begin_game(self):
-        # Reset the game settings.
-        # self.ai_settings.initialize_dynamic_settings() # TODO
 
         # Hide the mouse cursor.
         pygame.mouse.set_visible(False)
 
         # Reset the game statistics.
-        self.game_active = True
+        self.game_state = GameState.game_active
 
         # Reset the scoreboard images.
         # sb.prep_score()        # TODO
@@ -91,7 +96,21 @@ class Game:
 
         # Create a new fleet and center the ship.
         self.level_generator.create_fleet()
-        self.player.move_to_beginning()
+
+
+
+
+    def level_ended(self):
+        # TODO fazer animacaozinha que o alien desce do topo ate o meio
+        self.time0 += self.clock.tick()
+        print(self.time0)
+        if self.time0 > Settings.next_level_delay:
+            self.game_state = GameState.game_active
+            self.time0 = 0
+            self.begin_game()
+
+
+
 
     """
     def check_high_score(stats, sb):
@@ -147,5 +166,5 @@ class Game:
             sleep(0.5)
         else:
             """
-        self.game_active = False
+        self.game_state = GameState.game_inactive
         pygame.mouse.set_visible(True)

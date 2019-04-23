@@ -1,4 +1,5 @@
 from graphical_elements.background import Background
+from settings import GameState
 import pygame
 
 
@@ -14,7 +15,7 @@ class Painter:
         """Update images on the screen and flip to the new screen."""
         # Redraw the screen during each pass through the loop.
         # screen.fill(ai_settings.bg_color)
-        if self.game.game_active:
+        if self.game.game_state == GameState.game_active or self.game.game_state == GameState.game_level_passed:
             self.background.blitme()
             self.background.blitme2()
             self.background.update()
