@@ -87,6 +87,7 @@ class Game:
     def begin_game(self):
 
         # Hide the mouse cursor.
+        self.game_state = GameState.game_active
         pygame.mouse.set_visible(False)
 
         # Reset the scoreboard images.
@@ -101,7 +102,6 @@ class Game:
         self.begin_level()
 
     def begin_level(self):
-        self.game_state = GameState.game_active
         self.time_until_next_horde = 0
 
         # Empty the list of aliens and bullets.
@@ -154,6 +154,9 @@ class Game:
         else:
             """
         self.game_state = GameState.game_inactive
+
+        self.player.reset_health()
+        self.player.reset_position()
 
         self.enemies.empty()
         self.allied_projectiles.empty()

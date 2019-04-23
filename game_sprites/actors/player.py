@@ -26,6 +26,12 @@ class Player(Actor):
     def cooldown_weapon(self):
         self.weapon.cooldown()
 
+    def reset_health(self):
+        self.hp = self.maxhp
+
+    def reset_position(self):
+        self.position = self.starting_position
+
     def fire_weapon(self, projectile_group):
         if self.weapon.weapon_ready():
             projectile_group.add(self.weapon.fire(self.rect.midtop))
