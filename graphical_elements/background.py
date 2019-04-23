@@ -1,8 +1,9 @@
 import pygame
 
-class Background():
 
-    def __init__(self, screen):
+class Background:
+
+    def __init__ (self, screen):
         """Initialize the background and set its starting position."""
         self.screen = screen
 
