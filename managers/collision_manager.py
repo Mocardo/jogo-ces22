@@ -1,5 +1,5 @@
 import pygame
-
+from graphical_elements.explosion_animation import ExplosionAnimation
 
 class CollisionManager:
     def __init__(self, game):
@@ -55,5 +55,6 @@ class CollisionManager:
     def check_player_enemy_collision(self):
         player_colisions = pygame.sprite.spritecollide(self.player, self.enemies, True)
 
-        for drop in player_colisions:
+        for enemy in player_colisions:
+            self.game.explosion_group.add(ExplosionAnimation(self.screen, enemy.position))
             self.player.hp -= 40
