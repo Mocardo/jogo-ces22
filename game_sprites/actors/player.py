@@ -23,9 +23,6 @@ class Player(Actor):
         self.speed = Settings.player_base_speed
         self.weapon = Pistol(self.screen, self.__class__.faction)
 
-    def cooldown_weapon(self):
-        self.weapon.cooldown()
-
     def reset_health(self):
         self.hp = self.maxhp
 

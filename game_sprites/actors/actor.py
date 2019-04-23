@@ -41,8 +41,12 @@ class Actor(GameSprite):
     def die(self):
         self.kill()
 
+    def cooldown_weapon(self):
+        self.weapon.cooldown()
+
     def fire_weapon(self, projectile_group):
-        projectile_group.add(self.weapon.fire(self.rect.midtop))
+        if self.weapon.weapon_ready():
+            projectile_group.add(self.weapon.fire(self.rect.midtop))
 
     def move_to_beginning(self):
         """Center the ship on the screen."""

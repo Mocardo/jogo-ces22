@@ -3,6 +3,7 @@ from game_sprites.actors.actor import Faction
 from settings import Settings
 from graphical_elements.health_bar import HealthBar
 
+
 class AbstractEnemy(Actor):
     faction = Faction.Enemy
 
@@ -19,3 +20,7 @@ class AbstractEnemy(Actor):
         self.maxhp = Settings.alien_max_hp*level
         self.hp = self.maxhp
         self.health_bar = HealthBar(screen, self)
+
+    def fire_weapon(self, projectile_group):
+        if self.weapon.weapon_ready():
+            projectile_group.add(self.weapon.fire(self.rect.midbottom))
