@@ -27,12 +27,16 @@ class Actor(GameSprite):
 
         if self.rect.left < self.screen_rect.left:
             self.rect.left = self.screen_rect.left
+            self.velocity[0] = -self.velocity[0]
         if self.rect.right > self.screen_rect.right:
             self.rect.right = self.screen_rect.right
+            self.velocity[0] = -self.velocity[0]
         if self.rect.top < self.screen_rect.top:
             self.rect.top = self.screen_rect.top
+            self.velocity[1] = -self.velocity[1]
         if self.rect.bottom > self.screen_rect.bottom:
             self.rect.bottom = self.screen_rect.bottom
+            self.velocity[1] = -self.velocity[1]
 
     def die(self):
         self.kill()

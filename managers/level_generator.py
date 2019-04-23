@@ -28,9 +28,10 @@ class LevelGenerator:
         dificuldade = []
         i = 0
         while len(dificuldade) < sizefleet:
-            dificuldade.append(math.ceil(1 / (0.1 + chi2.cdf(entradas[i], self.nivel))))
+            dificuldade.append(math.ceil(1 / ((0.1/math.sqrt(self.nivel)) + chi2.cdf(entradas[i], self.nivel))))
             i = i + 1
 
+        print(dificuldade)
         i = 0
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):

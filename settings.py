@@ -16,11 +16,12 @@ class Settings:
 
     # Player settings
     player_max_hp = 100
-    player_base_speed = 5
+    player_base_speed = 3
 
     # Projectile settings
     bullet_base_damage = 10
-    bullet_base_speed = 5
+    player_bullet_base_speed = 5
+    enemy_bullet_base_speed = 1
     laser_base_speed = 1
     laser_base_damage = 1
     """

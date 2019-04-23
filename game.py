@@ -15,6 +15,7 @@ from managers.graveyard import Graveyard
 from managers.level_generator import LevelGenerator
 from graphical_elements.starting_screen import StartingScreen
 from pygame.sprite import Group
+from ai import AI
 
 
 class Game:
@@ -45,13 +46,19 @@ class Game:
 
         self.starting_screen = StartingScreen(self.screen)
         self.painter = Painter(self)
+
+        self.ai = AI(self)
+
         self.game_state = GameState.game_inactive
 
         self.clock = pygame.time.Clock()
         self.time_until_next_horde = 0
+        pygame.mixer.init()
+
+
 
     def run(self):
-        pygame.mixer.init()
+
         pygame.mixer.music.load("sound/start.mp3")
         while True:
             self.input_handler.parse_user_input()
@@ -66,6 +73,7 @@ class Game:
             self.input_handler.parse_user_input()
             if self.game_state == GameState.game_active:
                 self.player.update()
+                self.ai.update_aliens()
                 self.enemies.update()
                 self.drop_group.update()
                 self.allied_projectiles.update()

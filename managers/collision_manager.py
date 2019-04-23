@@ -39,10 +39,10 @@ class CollisionManager:
                                                          True)
 
         for bullet in enemy_collisions:
-            self.player.decrease_life(bullet.damage)
+            self.player.hp -= bullet.damage
 
         for bullet in neutral_collisions:
-            self.player.decrease_life(bullet.damage)
+            self.player.hp -= bullet.damage
 
     def check_player_drop_collision(self):
         drop_colisions = pygame.sprite.spritecollide(self.player, self.drop_group, True)
