@@ -1,5 +1,7 @@
 from game_sprites.drops.drop import Drop
 from game import GameState
+from graphical_elements.explosion_animation import ExplosionAnimation
+
 
 class Graveyard:
     def __init__(self, game):
@@ -14,6 +16,7 @@ class Graveyard:
         for enemy in self.game.enemies:
             if enemy.hp <= 0:
                 self.game.drop_group.add(Drop(self.screen, enemy.position))
+                self.game.explosion_group.add(ExplosionAnimation(self.screen, enemy.position))
                 enemy.die()
 
         if len(self.game.enemies.sprites()) == 0:

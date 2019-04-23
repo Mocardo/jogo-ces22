@@ -26,6 +26,8 @@ class Painter:
             self.game.neutral_projectiles.blitme()
             self.game.allied_projectiles.blitme()
             self.game.player.blitme()
+            for explosion in self.game.explosion_group:
+                explosion.draw()
 
             # Draw the score information.
             # sb.show_score() # TODO

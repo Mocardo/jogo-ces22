@@ -32,12 +32,11 @@ class Settings:
 
     # Alien settings
     fleet_drop_speed = 10
-
     alien_max_hp = 20
     alien_base_speed = 2
 
     # Drop settings
-    drop_acceleration = 0.04
+    drop_acceleration = 0.02
     """
     # Scoring
     alien_points = 50
@@ -45,6 +44,10 @@ class Settings:
     score_scale = 1.5
     """
 
+    # Graphics settings
+    explosion_duration = 500
+
+    # Game settings
     next_level_delay = 3000
 
     def __init__(self):

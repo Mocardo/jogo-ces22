@@ -14,6 +14,7 @@ from managers.collision_manager import CollisionManager
 from managers.graveyard import Graveyard
 from managers.level_generator import LevelGenerator
 from graphical_elements.starting_screen import StartingScreen
+from pygame.sprite import Group
 
 
 class Game:
@@ -32,6 +33,7 @@ class Game:
         self.enemy_projectiles = ProjectileGroup(self.screen)
         self.neutral_projectiles = ProjectileGroup(self.screen)
         self.drop_group = DropGroup(self.screen)
+        self.explosion_group = Group()
 
         self.player = Player(self.screen)
         self.enemies = EnemyGroup(self.screen)
@@ -71,6 +73,7 @@ class Game:
                 self.neutral_projectiles.update()
                 self.collision_manager.check_collisions()
                 self.graveyard.check_deaths()
+                self.explosion_group.update()
                 if not pygame.mixer.music.get_busy():
                     pygame.mixer.music.play()
             elif self.game_state == GameState.game_level_passed:
@@ -81,6 +84,7 @@ class Game:
                 self.enemy_projectiles.update()
                 self.neutral_projectiles.update()
                 self.collision_manager.check_collisions()
+                self.explosion_group.update()
                 if not pygame.mixer.music.get_busy():
                     pygame.mixer.music.play()
                 self.level_ended()
@@ -101,6 +105,7 @@ class Game:
 
     def begin_level(self):
         self.game_state = GameState.game_active
+        self.time_until_next_horde = 0
 
         # Empty the list of aliens and bullets.
         self.enemies.empty()
@@ -118,7 +123,6 @@ class Game:
         self.time_until_next_horde += tick
         if self.time_until_next_horde > Settings.next_level_delay:
             self.game_state = GameState.game_active
-            self.time_until_next_horde = 0
             self.begin_level()
 
     """
@@ -127,29 +131,6 @@ class Game:
         if stats.score > stats.high_score:
             stats.high_score = stats.score
             sb.prep_high_score()
-    """
-
-    """
-    def create_enemies(self):
-        # Create a full fleet of aliens.
-        # Create an alien and find the number of aliens in a row.
-        enemy = Alien(self.screen)
-        number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
-        number_rows = get_number_rows(ai_settings, ship.rect.height, alien.rect.height)
-
-        # Create the fleet of aliens.
-        for row_number in range(number_rows):
-            for alien_number in range(number_aliens_x):
-                create_alien(ai_settings, screen, aliens, alien_number, row_number)
-
-    def create_alien(ai_settings, screen, aliens, alien_number, row_number):
-        # Create an alien and place it in the row.
-        alien = Alien(ai_settings, screen)
-        alien_width = alien.rect.width
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
-        aliens.add(alien)
     """
 
     def end_game(self):
