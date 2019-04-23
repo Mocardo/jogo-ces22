@@ -17,6 +17,7 @@ class CollisionManager:
         self.check_enemies_projectiles_collisions()
         self.check_player_projectiles_collisions()
         self.check_player_drop_collision()
+        self.check_player_enemy_collision()
 
     def check_enemies_projectiles_collisions(self):
         allied_collisions = pygame.sprite.groupcollide(self.enemies, self.allied_projectiles,
@@ -49,3 +50,9 @@ class CollisionManager:
 
         for drop in drop_colisions:
             self.game.scoreboard.update_score(drop.points)
+
+    def check_player_enemy_collision(self):
+        player_colisions = pygame.sprite.spritecollide(self.player, self.enemies, True)
+
+        for drop in player_colisions:
+            self.player.hp -= 40
