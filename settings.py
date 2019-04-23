@@ -40,6 +40,7 @@ class Settings:
     # Drop settings
     drop_acceleration = 0.02
     drop_points = 500
+    drop_hp = 10
 
     # Scoring
     points_per_alien = 100

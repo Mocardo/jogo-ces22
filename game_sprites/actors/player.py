@@ -32,3 +32,9 @@ class Player(Actor):
     def fire_weapon(self, projectile_group):
         if self.weapon.weapon_ready():
             projectile_group.add(self.weapon.fire(self.rect.midtop))
+
+    def increase_hp(self, hp):
+        self.hp += hp
+        if self.hp > self.maxhp:
+            self.hp = self.maxhp
+

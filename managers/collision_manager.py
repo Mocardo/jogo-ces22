@@ -50,6 +50,7 @@ class CollisionManager:
 
         for drop in drop_colisions:
             self.game.scoreboard.update_score(drop.points)
+            self.game.player.increase_hp(drop.hp)
 
     def check_player_enemy_collision(self):
         player_colisions = pygame.sprite.spritecollide(self.player, self.enemies, True)
