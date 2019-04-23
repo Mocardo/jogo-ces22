@@ -39,12 +39,10 @@ class Settings:
 
     # Drop settings
     drop_acceleration = 0.02
-    """
+    drop_points = 500
+
     # Scoring
-    alien_points = 50
-    # How quickly the alien point values increase
-    score_scale = 1.5
-    """
+    points_per_alien = 100
 
     # Graphics settings
     explosion_duration = 500

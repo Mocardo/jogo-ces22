@@ -29,8 +29,7 @@ class Painter:
             for explosion in self.game.explosion_group:
                 explosion.draw()
 
-            # Draw the score information.
-            # sb.show_score() # TODO
+            self.game.hud.draw()
         # Draw the play button if the game is inactive.
         else:
             self.game.starting_screen.paint()

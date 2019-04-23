@@ -13,6 +13,7 @@ class Drop(GameSprite):
 
         # Load the drop image and set its rect attribute.
         self.set_position(position)
+        self.points = Settings.drop_points
 
     def update(self):
         """Move the drop down the screen."""

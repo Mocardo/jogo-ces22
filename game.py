@@ -16,6 +16,8 @@ from managers.level_generator import LevelGenerator
 from graphical_elements.starting_screen import StartingScreen
 from pygame.sprite import Group
 from ai import AI
+from scoreboard import Scoreboard
+from graphical_elements.hud import HUD
 
 
 class Game:
@@ -27,6 +29,8 @@ class Game:
 
         self.stats = GameStats()
         # self.sb = Scoreboard(self.screen, self.stats)
+
+        self.scoreboard = Scoreboard(self.screen)
 
         # Make a ship, a group of projectiles, and a group of aliens.
 
@@ -45,6 +49,7 @@ class Game:
         self.input_handler = InputHandler(self)
 
         self.starting_screen = StartingScreen(self.screen)
+        self.hud = HUD(self)
         self.painter = Painter(self)
 
         self.ai = AI(self)
@@ -72,6 +77,7 @@ class Game:
                 self.collision_manager.check_collisions()
                 self.graveyard.check_deaths()
                 self.explosion_group.update()
+
             elif self.game_state == GameState.game_level_passed:
                 self.player.update()
                 self.enemies.update()
@@ -89,12 +95,6 @@ class Game:
         # Hide the mouse cursor.
         self.game_state = GameState.game_active
         pygame.mouse.set_visible(False)
-
-        # Reset the scoreboard images.
-        # sb.prep_score()        # TODO
-        # sb.prep_high_score()
-        # sb.prep_level()
-        # sb.prep_ships()
 
         pygame.mixer.music.load("sound/BGM.mp3")
         pygame.mixer.music.play()
@@ -122,41 +122,13 @@ class Game:
             self.game_state = GameState.game_active
             self.begin_level()
 
-    """
-    def check_high_score(stats, sb):
-        # Check to see if there's a new high score.
-        if stats.score > stats.high_score:
-            stats.high_score = stats.score
-            sb.prep_high_score()
-    """
-
     def end_game(self):
-        """Respond to ship being hit by alien."""
-        # TODO implement lives
-        """"
-        if stats.ships_left > 0:
-            # Decrement ships_left.
-            stats.ships_left -= 1
-
-            # Update scoreboard.
-            sb.prep_ships()
-
-            # Empty the list of aliens and bullets.
-            aliens.empty()
-            bullets.empty()
-
-            # Create a new fleet and center the ship.
-            create_fleet(ai_settings, screen, ship, aliens)
-            ship.center_ship()
-
-            # Pause.
-            sleep(0.5)
-        else:
-            """
         self.game_state = GameState.game_inactive
+        self.scoreboard.reset_score()
 
         self.player.reset_health()
         self.player.reset_position()
+        self.level_generator.nivel = 0
 
         self.enemies.empty()
         self.allied_projectiles.empty()

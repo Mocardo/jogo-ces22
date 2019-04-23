@@ -1,6 +1,7 @@
 from game_sprites.drops.drop import Drop
 from game import GameState
 from graphical_elements.explosion_animation import ExplosionAnimation
+from settings import Settings
 
 
 class Graveyard:
@@ -17,6 +18,7 @@ class Graveyard:
             if enemy.hp <= 0:
                 self.game.drop_group.add(Drop(self.screen, enemy.position))
                 self.game.explosion_group.add(ExplosionAnimation(self.screen, enemy.position))
+                self.game.scoreboard.update_score(Settings.points_per_alien * enemy.level)
                 enemy.die()
 
         if len(self.game.enemies.sprites()) == 0:

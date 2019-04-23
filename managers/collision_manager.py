@@ -46,7 +46,6 @@ class CollisionManager:
 
     def check_player_drop_collision(self):
         drop_colisions = pygame.sprite.spritecollide(self.player, self.drop_group, True)
-        # TODO run sound
 
         for drop in drop_colisions:
-            pass  # TODO aumentar pontos
+            self.game.scoreboard.update_score(drop.points)
