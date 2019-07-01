@@ -1,7 +1,17 @@
 import pygame
 from graphical_elements.explosion_animation import ExplosionAnimation
 
-class CollisionManager:
+
+class Singleton(object):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not isinstance(cls._instance, cls):
+            cls._instance = object.__new__(cls)
+        return cls._instance
+
+
+class CollisionManager(Singleton):
     def __init__(self, game):
         self.game = game
         self.screen = game.screen

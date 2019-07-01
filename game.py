@@ -66,29 +66,37 @@ class Game:
     def run(self):
         while True:
             self.input_handler.parse_user_input()
-            if self.game_state == GameState.game_active:
-                self.player.update()
-                self.ai.update_aliens()
-                self.enemies.update()
-                self.drop_group.update()
-                self.allied_projectiles.update()
-                self.enemy_projectiles.update()
-                self.neutral_projectiles.update()
-                self.collision_manager.check_collisions()
-                self.graveyard.check_deaths()
-                self.explosion_group.update()
-
-            elif self.game_state == GameState.game_level_passed:
-                self.player.update()
-                self.enemies.update()
-                self.drop_group.update()
-                self.allied_projectiles.update()
-                self.enemy_projectiles.update()
-                self.neutral_projectiles.update()
-                self.collision_manager.check_collisions()
-                self.explosion_group.update()
-                self.level_ended()
+            self.update()
             self.painter.paint()
+
+    def update(self):
+        if self.game_state == GameState.game_active:
+            self.game_activate_update()
+        elif self.game_state == GameState.game_level_passed:
+            self.game_level_passed_update()
+
+    def game_activate_update(self):
+        self.player.update()
+        self.ai.update_aliens()
+        self.enemies.update()
+        self.drop_group.update()
+        self.allied_projectiles.update()
+        self.enemy_projectiles.update()
+        self.neutral_projectiles.update()
+        self.collision_manager.check_collisions()
+        self.graveyard.check_deaths()
+        self.explosion_group.update()
+
+    def game_level_passed_update(self):
+        self.player.update()
+        self.enemies.update()
+        self.drop_group.update()
+        self.allied_projectiles.update()
+        self.enemy_projectiles.update()
+        self.neutral_projectiles.update()
+        self.collision_manager.check_collisions()
+        self.explosion_group.update()
+        self.level_ended()
 
     def begin_game(self):
 

@@ -59,4 +59,3 @@ class LevelGenerator:
                            alien.rect.height + 2 * alien.rect.height * row_number])
 
         self.enemies.add(alien)
-
